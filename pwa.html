@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orca Orca Web</title>
+<meta name="description" content="Orca Orca Web — a Chrome-style browser experience as an installable web app.">
+<meta name="theme-color" content="#3a6ef0">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+<link rel="icon" type="image/jpeg" href="/IMG_7168.jpeg">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Orca">
+<link rel="stylesheet" href="/css/browser.css">
+</head>
+<body>
+
+<div id="splash" aria-hidden="true">
+  <div class="box">
+    <img src="/IMG_7168.jpeg" alt="Orca Orca Web logo">
+    <div class="name">Orca Orca Web</div>
+    <div class="spin"></div>
+  </div>
+</div>
+
+<div id="app">
+  <!-- top (or bottom) toolbar -->
+  <header id="toolbar">
+    <div class="toolbar-row">
+      <button id="btn-home" class="tbtn" title="Home" aria-label="Home"></button>
+      <button id="btn-back" class="tbtn wide-only" title="Back" aria-label="Back"></button>
+      <button id="btn-fwd" class="tbtn wide-only" title="Forward" aria-label="Forward"></button>
+      <button id="btn-reload" class="tbtn wide-only" title="Reload" aria-label="Reload"></button>
+      <div id="omnibox">
+        <button id="omni-lock" title="Page info" aria-label="Page info"></button>
+        <input id="omni-input" type="text" placeholder="Search or type web address" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" aria-label="Address and search bar">
+        <button id="omni-clear" title="Clear" aria-label="Clear input"></button>
+        <button id="omni-mic" title="Voice search" aria-label="Voice search"></button>
+      </div>
+      <button id="tab-count" title="Switch tabs" aria-label="Switch tabs"><span class="box">1</span><span class="incog-dot"></span></button>
+      <button id="btn-menu" class="tbtn" title="Menu" aria-label="Menu"></button>
+    </div>
+    <div id="progress"><div class="bar"></div></div>
+  </header>
+
+  <!-- suggestions dropdown -->
+  <div id="suggest" role="listbox" aria-label="Suggestions"></div>
+
+  <!-- translate infobar -->
+  <div id="translate-bar" class="infobar" style="display:none"></div>
+
+  <!-- find in page -->
+  <div id="findbar">
+    <input id="find-input" type="text" placeholder="Find in page" aria-label="Find in page">
+    <span id="find-count" class="count"></span>
+    <button id="find-prev" class="tbtn" title="Previous" aria-label="Previous match"></button>
+    <button id="find-next" class="tbtn" title="Next" aria-label="Next match"></button>
+    <button id="find-close" class="tbtn" title="Close" aria-label="Close find"></button>
+  </div>
+
+  <!-- tab content -->
+  <main id="content">
+    <div id="ptr" aria-hidden="true"></div>
+  </main>
+  <div id="split-bar"></div>
+
+  <!-- tab switcher -->
+  <div id="switcher" role="dialog" aria-label="Tab switcher">
+    <div class="sw-head">
+      <div class="sw-seg">
+        <button id="sw-seg-normal" class="on">Tabs</button>
+        <button id="sw-seg-incog">Incognito</button>
+      </div>
+      <div class="spacer"></div>
+      <button id="sw-menu" class="tbtn" title="Tab options" aria-label="Tab options"></button>
+      <button id="sw-close" class="tbtn" title="Done" aria-label="Done"></button>
+    </div>
+    <div class="sw-grid" id="sw-grid"></div>
+    <button id="sw-new" class="sw-new">＋ New tab</button>
+  </div>
+
+  <!-- contextual search -->
+  <div id="cs-peek"><span></span></div>
+  <div id="cs-panel">
+    <div class="cs-head">
+      <span class="q"></span>
+      <button id="cs-close" class="tbtn" title="Close" aria-label="Close"></button>
+    </div>
+    <div class="cs-body"></div>
+  </div>
+
+  <!-- app menu -->
+  <div id="menu-pop" role="menu" aria-label="Browser menu"></div>
+
+  <!-- snackbars -->
+  <div id="snacks" aria-live="polite"></div>
+
+  <!-- overlays -->
+  <div id="modal-root"></div>
+  <div id="ctx-root"></div>
+  <div id="tip-layer"></div>
+
+  <!-- first-run experience -->
+  <div id="fre" role="dialog" aria-label="Welcome"></div>
+</div>
+
+<script type="module" src="/js/pwa/app/main.js"></script>
+<script>
+  // static icon injection for toolbar buttons (mirrors utils.js ICONS)
+  (function () {
+    const I = {
+      back: 'M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z',
+      forward: 'M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z',
+      reload: 'M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z',
+      home: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
+      menu: 'M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
+      lock: 'M18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-9-2a3 3 0 0 1 6 0v2H9V6z',
+      mic: 'M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z',
+      close: 'M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z',
+      down: 'M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z',
+      up: 'M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z',
+      incognito: 'M12 2a9 9 0 0 0-9 9 8.94 8.94 0 0 0 .5 2.9L3 15.5V17a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1.5l-.5-1.6A8.94 8.94 0 0 0 21 11a9 9 0 0 0-9-9zM7 14a2.5 2.5 0 1 1 2.5-2.5A2.5 2.5 0 0 1 7 14zm10 0a2.5 2.5 0 1 1 2.5-2.5A2.5 2.5 0 0 1 17 14z',
+      search: 'M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z',
+      refresh: 'M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z',
+    };
+    const set = (id, name) => {
+      const n = document.getElementById(id);
+      if (n) n.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + I[name] + '"/></svg>';
+    };
+    set('btn-home', 'home'); set('btn-back', 'back'); set('btn-fwd', 'forward');
+    set('btn-reload', 'reload'); set('btn-menu', 'menu'); set('omni-lock', 'lock');
+    set('omni-clear', 'close'); set('omni-mic', 'mic');
+    set('find-prev', 'up'); set('find-next', 'down'); set('find-close', 'close');
+    set('sw-menu', 'menu'); set('sw-close', 'close'); set('cs-close', 'close');
+    const ptr = document.getElementById('ptr');
+    if (ptr) ptr.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + I.refresh + '"/></svg>';
+    const dot = document.querySelector('#tab-count .incog-dot');
+    if (dot) dot.innerHTML = '<svg viewBox="0 0 24 24"><path d="' + I.incognito + '"/></svg>';
+    const peek = document.getElementById('cs-peek');
+    if (peek) peek.insertAdjacentHTML('afterbegin', '<svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:var(--accent)"><path d="' + I.search + '"/></svg>');
+  })();
+</script>
+</body>
+</html>

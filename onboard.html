@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Install Orca Orca Web — Add to Home Screen</title>
+<meta name="description" content="Add Orca Orca Web to your home screen and use it like a native browser app.">
+<meta name="theme-color" content="#3a6ef0">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+<link rel="icon" type="image/jpeg" href="/IMG_7168.jpeg">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Orca">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site-header">
+    <img src="/IMG_7168.jpeg" alt="Orca Orca Web logo">
+    <div class="names"><b>Orca Orca Web</b><span>install guide</span></div>
+    <div class="spacer"></div>
+    <a class="btn ghost" href="/">← Home</a>
+  </header>
+
+  <section class="onboard-hero">
+    <img class="appicon" src="/IMG_7168.jpeg" alt="Orca app icon">
+    <h1>Add Orca to your Home Screen</h1>
+    <p>Install <b>Orca Orca Web</b> as an app: it launches fullscreen from its own icon, works offline, and feels native. No app store needed — it’s a Progressive Web App.</p>
+    <div class="install-row">
+      <button class="btn" id="install-btn" hidden>📲 Install Orca Orca Web</button>
+      <a class="btn ghost" href="/pwa">Just open the app →</a>
+    </div>
+    <div class="install-note" id="install-note"></div>
+  </section>
+
+  <div class="steps">
+    <div class="step-card" data-platform="android">
+      <h3>🤖 Android · Chrome</h3>
+      <ol>
+        <li>Open this site in <b>Chrome</b>.</li>
+        <li>Tap the <kbd>⋮</kbd> menu (top right).</li>
+        <li>Tap <b>Add to Home screen</b> or <b>Install app</b>.</li>
+        <li>Confirm with <b>Install</b> — the Orca icon appears on your home screen.</li>
+      </ol>
+    </div>
+    <div class="step-card" data-platform="ios">
+      <h3>🍎 iPhone / iPad · Safari</h3>
+      <ol>
+        <li>Open this site in <b>Safari</b>.</li>
+        <li>Tap the <b>Share</b> button <kbd>⎋↑</kbd> (bottom bar).</li>
+        <li>Scroll and tap <b>Add to Home Screen</b>.</li>
+        <li>Tap <b>Add</b> — look for the Orca icon.</li>
+      </ol>
+    </div>
+    <div class="step-card" data-platform="desktop">
+      <h3>💻 Desktop · Chrome / Edge</h3>
+      <ol>
+        <li>Open this site in Chrome or Edge.</li>
+        <li>Click the <b>install icon</b> (⊕ in a monitor) at the right of the address bar — or use the <b>Install</b> button above when visible.</li>
+        <li>Click <b>Install</b>. Orca opens in its own window and joins your apps.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="why">
+    <h2>Why install?</h2>
+    <ul>
+      <li><b>Fullscreen, standalone window</b> — no browser chrome, just Orca.</li>
+      <li><b>Offline capable</b> — the app shell and your saved pages work without a network.</li>
+      <li><b>Faster launch</b> — the shell is cached by a service worker; it opens instantly.</li>
+      <li><b>Home-screen shortcuts</b> — long-press the icon for “New tab” and “New incognito tab”.</li>
+      <li><b>Your data stays put</b> — bookmarks, history and passwords are stored on-device.</li>
+    </ul>
+  </div>
+
+  <footer class="site-footer">
+    <p>Having trouble? Make sure you’re on HTTPS (Vercel does this automatically) and that you’ve opened the site at least once.</p>
+  </footer>
+</div>
+<script src="/js/onboard.js" defer></script>
+</body>
+</html>
