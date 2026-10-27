@@ -1,0 +1,43 @@
+{
+  "name": "Orca Orca Web",
+  "short_name": "Orca",
+  "description": "Orca Orca Web — a Chrome-style web browser experience as an installable PWA: tabs, omnibox, bookmarks, history, downloads, sync and more.",
+  "id": "/pwa",
+  "start_url": "/pwa?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "orientation": "any",
+  "background_color": "#3a6ef0",
+  "theme_color": "#3a6ef0",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/IMG_7168.jpeg", "sizes": "1026x1023", "type": "image/jpeg", "purpose": "any" }
+  ],
+  "shortcuts": [
+    {
+      "name": "New tab",
+      "short_name": "New tab",
+      "url": "/pwa?action=newtab",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "New incognito tab",
+      "short_name": "Incognito",
+      "url": "/pwa?action=incognito",
+      "icons": [{ "src": "/icons/maskable-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "How to install",
+      "short_name": "Install",
+      "url": "/onboard",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
